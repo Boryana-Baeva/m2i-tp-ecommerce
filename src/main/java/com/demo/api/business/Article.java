@@ -15,14 +15,6 @@ public class Article {
     @JoinColumn(name = "categorie_id")
     private Categorie categorie;
 
-    public Categorie getCategorie() {
-        return categorie;
-    }
-
-    public void setCategorie(Categorie categorie) {
-        this.categorie = categorie;
-    }
-
     public Article() {
     }
 
@@ -53,6 +45,15 @@ public class Article {
 
     public void setPrix(Double prix) {
         this.prix = prix;
+    }
+
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+//        categorie.addArticle(this);
     }
 
     @Override
