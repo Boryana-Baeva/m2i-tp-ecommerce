@@ -25,6 +25,7 @@ public class DAO<T> {
             tx.begin();
             entityManager.persist(t);
             tx.commit();
+            entityManager.refresh(t);
         }
         catch (Exception e) {
             System.out.println("Erreur lors de l'enregistrement !");
@@ -79,6 +80,22 @@ public class DAO<T> {
             tx.begin();
             entityManager.merge(t);
             tx.commit();
+        }
+        catch (Exception e) {
+            System.out.println("Erreur lors de la modification !");
+            tx.rollback();
+        }
+    }
+
+
+    public void patch(T t){
+        EntityTransaction tx = entityManager.getTransaction();
+
+        try{
+            tx.begin();
+            entityManager.merge(t);
+            tx.commit();
+            entityManager.refresh(t);
         }
         catch (Exception e) {
             System.out.println("Erreur lors de la modification !");

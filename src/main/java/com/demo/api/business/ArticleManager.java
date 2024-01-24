@@ -45,4 +45,20 @@ public class ArticleManager {
         return false;
     }
 
+    public boolean patch(Article article, Integer id) {
+        Article articleExisting = articleDAO.findById(id);
+
+        if(articleExisting != null) {
+            if(article.getNom() != null)
+                articleExisting.setNom(article.getNom());
+            if(article.getPrix() != null)
+                articleExisting.setPrix(article.getPrix());
+            if(article.getCategorie() != null)
+                articleExisting.setCategorie(article.getCategorie());
+
+            articleDAO.patch(articleExisting);
+            return true;
+        }
+        return false;
+    }
 }

@@ -2,17 +2,12 @@ package com.demo.api.business;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 public class Categorie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private  String nom;
-//    @OneToMany(mappedBy = "categorie")
-//    private List<Article> articles = new ArrayList<>();
 
     public Categorie(String nom) {
         this.nom = nom;
@@ -37,24 +32,11 @@ public class Categorie {
         this.nom = nom;
     }
 
-//    public List<Article> getArticles() {
-//        return articles;
-//    }
-//
-//    public void setArticles(List<Article> articles) {
-//        this.articles = articles;
-//    }
-//
-//    public void addArticle(Article article) {
-//        this.getArticles().add(article);
-//    }
-
     @Override
     public String toString() {
         return "Categorie{" +
                 "id=" + id +
                 ", nom='" + nom + '\'' +
-//                ", articles=" + articles.stream().map(a -> a.getNom()) +
                 '}';
     }
 }

@@ -89,4 +89,31 @@ public class ArticleAPI {
             return Response.ok().entity(articleManager.getById(id)).build();
         }
     }
+
+    @PATCH
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response patch(Article article, @PathParam("id") Integer id){
+        if(article == null){
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Article non existant !").build();
+        }
+        else if(id < 1 || id > articleManager.getAll().size() ||
+                article.getId() < 1 || article.getId() > articleManager.getAll().size()) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("ID inexistant !").build();
+        }
+        else if(!article.getId().equals(id)) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("ID mismatch !").build();
+        }
+        else {
+            if(!articleManager.patch(article, id)) {
+                return Response.status(Response.Status.BAD_REQUEST)
+                        .entity("Article non existant !").build();
+            }
+            return Response.ok().entity(articleManager.getById(id)).build();
+        }
+    }
 }

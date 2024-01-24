@@ -11,7 +11,7 @@ public class Article {
     private String nom;
     private Double prix;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "categorie_id")
     private Categorie categorie;
 
@@ -53,7 +53,6 @@ public class Article {
 
     public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
-//        categorie.addArticle(this);
     }
 
     @Override
