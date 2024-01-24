@@ -1,7 +1,7 @@
 package com.demo.api.api;
 
 import com.demo.api.business.ArticleManager;
-import com.demo.api.data.Article;
+import com.demo.api.business.Article;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;

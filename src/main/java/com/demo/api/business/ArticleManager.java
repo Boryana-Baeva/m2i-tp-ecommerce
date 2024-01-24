@@ -1,6 +1,5 @@
 package com.demo.api.business;
 
-import com.demo.api.data.Article;
 import com.demo.api.data.DAO;
 
 import java.util.List;

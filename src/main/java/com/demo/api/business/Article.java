@@ -1,4 +1,4 @@
-package com.demo.api.data;
+package com.demo.api.business;
 
 import jakarta.persistence.*;
 
