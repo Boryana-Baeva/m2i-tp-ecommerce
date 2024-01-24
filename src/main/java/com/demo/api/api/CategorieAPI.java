@@ -33,4 +33,31 @@ public class CategorieAPI {
             return Response.status(Response.Status.CREATED).entity(categorie).build();
         }
     }
+
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getById(@PathParam("id") Integer id){
+        Categorie categorie = categorieManager.getById(id);
+        if(categorie == null) {
+            return Response.status(Response.Status.NOT_FOUND).entity("404 : Categorie introuvable !").build();
+        }
+        else {
+            return Response.ok().entity(categorie).build();
+        }
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response delete(@PathParam("id") Integer id){
+        Categorie categorie = categorieManager.getById(id);
+        if(categorie == null) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Categorie inexistante !").build();
+        }
+        else {
+            categorieManager.delete(categorie);
+            return Response.ok().entity("Categorie supprimée avec succès !").build();
+        }
+    }
 }
