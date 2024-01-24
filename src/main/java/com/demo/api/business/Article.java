@@ -11,6 +11,18 @@ public class Article {
     private String nom;
     private Double prix;
 
+    @ManyToOne
+    @JoinColumn(name = "categorie_id")
+    private Categorie categorie;
+
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
+
     public Article() {
     }
 
