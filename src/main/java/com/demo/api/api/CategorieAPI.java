@@ -1,6 +1,5 @@
 package com.demo.api.api;
 
-import com.demo.api.business.Article;
 import com.demo.api.business.Categorie;
 import com.demo.api.business.CategorieManager;
 import jakarta.ws.rs.*;
@@ -58,6 +57,28 @@ public class CategorieAPI {
         else {
             categorieManager.delete(categorie);
             return Response.ok().entity("Categorie supprimée avec succès !").build();
+        }
+    }
+
+    @PUT
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response update(Categorie categorie, @PathParam("id") Integer id){
+        if(categorie == null){
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Categorie non existante !").build();
+        }
+        else if(!categorie.getId().equals(id)) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("ID mismatch !").build();
+        }
+        else {
+            if(!categorieManager.update(categorie, id)) {
+                return Response.status(Response.Status.BAD_REQUEST)
+                        .entity("Categorie non existante !").build();
+            }
+            return Response.ok().entity(categorieManager.getById(id)).build();
         }
     }
 }

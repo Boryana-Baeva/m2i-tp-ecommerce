@@ -3,7 +3,6 @@ package com.demo.api.business;
 import com.demo.api.data.DAO;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CategorieManager {
     private final DAO<Categorie> categorieDAO = new DAO<>(Categorie.class);
@@ -35,11 +34,23 @@ public class CategorieManager {
         ArticleManager articleManager = ArticleManager.getInstance();
 
         List<Article> catArticles = articleManager.getAll()
-                                    .stream().filter(a -> a.getCategorie().getId().equals(categorie.getId()))
+                                    .stream()
+                                    .filter(a -> a.getCategorie() != null)
+                                    .filter(a -> a.getCategorie().getId().equals(categorie.getId()))
                                     .toList();
 
         catArticles.forEach(a -> a.setCategorie(null));
 
         categorieDAO.delete(categorie);
+    }
+
+    public boolean update(Categorie categorieNew, Integer id) {
+        Categorie categorieExisting = categorieDAO.findById(id);
+
+        if(categorieExisting != null) {
+            categorieDAO.update(categorieNew);
+            return true;
+        }
+        return false;
     }
 }

@@ -6,6 +6,8 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Path("/articles")
@@ -72,11 +74,6 @@ public class ArticleAPI {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("Article non existant !").build();
         }
-        else if(id < 1 || id > articleManager.getAll().size() ||
-                article.getId() < 1 || article.getId() > articleManager.getAll().size()) {
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity("ID inexistant !").build();
-        }
         else if(!article.getId().equals(id)) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("ID mismatch !").build();
@@ -98,11 +95,6 @@ public class ArticleAPI {
         if(article == null){
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("Article non existant !").build();
-        }
-        else if(id < 1 || id > articleManager.getAll().size() ||
-                article.getId() < 1 || article.getId() > articleManager.getAll().size()) {
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity("ID inexistant !").build();
         }
         else if(!article.getId().equals(id)) {
             return Response.status(Response.Status.BAD_REQUEST)
